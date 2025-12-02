@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlotUp</title>
+    <link rel="stylesheet" href="config.css">
+</head>
+<body>
+ 
+    <header>
+ 
+        <div class="container">
+ 
+            <a href="index.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
+ 
+            <a href="index.html">Home</a>
+            <a href="pesquisar.html">Pesquisa</a>
+            <a href="">Explorar</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="config.html">Configuração</a>
+ 
+        </div>
+ 
+    </header>
+
+    
+    <div class="card_info_pessoal">
+
+        <img src="midias/logo com fundo.png" alt="Foto De Perfil" class="foto_perfil">
+        Nome Completo Do Usuário: José Augusto Gondin Camargos
+
+        <p>Nome De Usuário: ocamargos</p>
+
+        <p>ID: 000.000.001</p>
+
+        
+        <p>Seguidores: 100</p>
+        <p>Seguindo: 50</p>
+
+    </div>
+
+    <div class="editar_perfil">
+        <p class="txt_card_ep">Informações Pessoais</p>
+
+        <p id="nome_completo">Nome Completo: José Augusto Gondin Camargos</p>
+        <p id="nome_usuario">Nome de Usuário: ocamargos</p>
+        <p id="nascimento">Data de Nascimento: 01/01/2000</p>
+        <p id="email">E-Mail: ocamargos@example.com</p>
+        <p id="telefone">Telefone (Celular): (00) 00000-0000</p>
+
+        <div class="container_popup">
+            <button class="openBtn" popovertarget="popup">Editar Informações</button>
+            <div id="popup" class="conteudo_popup" popover>
+                <a href="" class="fechar_popup">❌</a>
+                <h2 class="titulo_alterar_informacoes">Alterar Informações</h2>
+
+                <div class="alterar_info">
+
+                    <label>Nome Completo:</label>
+                    <input type="text" id="input_nome_completo"  placeholder="Digite seu nome completo" class="input">
+
+                    <label>Nome de Usuário:</label>
+                    <input type="text" id="input_nome_usuario" placeholder="Digite novo nome de usuário" class="input">
+
+                    <label>Data de Nascimento:</label>
+                    <input type="date" id="input_nascimento" class="input">
+
+                    <label>E-Mail:</label>
+                    <input type="email" id="input_email" placeholder="example@email.com" class="input">
+
+                    <label>Telefone (Celular):</label>
+                    <input type="tel" id="input_telefone" placeholder="(00) 00000-0000" class="input">
+
+                    <div class="salvar_cancelar">
+                        <button popovertarget="popup" popovertargetaction="hide" class="cancelar">Cancelar</button>
+                        <button popovertarget="popup" popovertargetaction="hide" class="salvar" >Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="editar_informacoes_conta">
+        <p class="txt_card_ic">Informações Da Conta</p>
+        <p>Privar Conta</p>
+        <p>Alterar Senha: ******</p>
+        <p>Idioma: Português</p>
+        <p>Tema: Claro</p>
+        <div class="popup_eic">
+            <button class="openBtn" popovertarget="popup">Editar Informações</button>
+
+            <div id="popup" popover="" class="conteudo_popup">
+                <p>ghjklç</p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <script src="config.js"></script>
+   
+</body>
+</html>

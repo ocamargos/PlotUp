@@ -3,38 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlotUp</title>
+    <title>PlotUp - Perfil</title>
     <link rel="stylesheet" href="perfil.css">
 </head>
 <body>
  
     <header>
- 
         <div class="container">
- 
             <a href="index.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
- 
             <a href="home.html">Home</a>
             <a href="pesquisar.html">Pesquisa</a>
             <a href="">Explorar</a>
             <a href="perfil.html">Perfil</a>
             <a href="config.html">Configuração</a>
- 
         </div>
- 
     </header>
 
-    <div class="perfil">
+    <div class="profile-container">
+        <!-- Header do Perfil -->
+        <div class="profile-header">
+            <div class="cover-photo" id="coverPhoto">
+                <button class="edit-cover-btn" id="editCoverBtn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Editar Capa
+                </button>
+            </div>
 
-        <img src="midias/logo com fundo.png" alt="Foto de Perfil" class="foto_perfil">
-        <p>Nome Completo: José Augusto Gondin Camargos</p>
-        <p>Nome De Usuário: ocamargos</p>
-        <p>ID: 000.000.001</p>
-        <p>Seguidores: 100</p>
-        <p>Seguindo: 50</p>
+            <div class="profile-info">
+                <div class="profile-pic-container">
+                    <div class="profile-pic" id="profilePic"></div>
+                    <button class="edit-pic-btn" id="editPicBtn">📷</button>
+                </div>
+
+                <div class="user-details">
+                    <h1 class="user-name" id="userName">Carregando...</h1>
+                    <p class="user-username" id="userUsername">@carregando</p>
+                    <p class="user-bio" id="userBio">Adicione uma bio para contar mais sobre você...</p>
+                    
+                    <div class="user-info-tags">
+                        <span class="info-tag">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Entrou em <span id="joinDate">Jan 2024</span>
+                        </span>
+                        <span class="info-tag">
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span id="userEmail">email@exemplo.com</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button class="btn-primary" id="editProfileBtn">Editar Perfil</button>
+                    <button class="btn-secondary" id="shareProfileBtn">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                        </svg>
+                        Compartilhar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="profile-stats">
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="postsCount">0</span>
+                    <span class="stat-label">Publicações</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="followersCount">0</span>
+                    <span class="stat-label">Seguidores</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">➕</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="followingCount">0</span>
+                    <span class="stat-label">Seguindo</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">❤️</div>
+                <div class="stat-info">
+                    <span class="stat-number" id="likesCount">0</span>
+                    <span class="stat-label">Curtidas</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Abas de Conteúdo -->
+        <div class="content-tabs">
+            <button class="tab-btn active" data-tab="posts">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                </svg>
+                Publicações
+            </button>
+            <button class="tab-btn" data-tab="media">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                Mídia
+            </button>
+            <button class="tab-btn" data-tab="likes">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                Curtidas
+            </button>
+        </div>
+
+        <!-- Conteúdo das Abas -->
+        <div class="tab-content" id="postsContent">
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h3>Nenhuma publicação ainda</h3>
+                <p>Suas publicações aparecerão aqui</p>
+                <button class="btn-primary">Criar primeira publicação</button>
+            </div>
+        </div>
+
+        <div class="tab-content hidden" id="mediaContent">
+            <div class="empty-state">
+                <div class="empty-icon">🖼️</div>
+                <h3>Nenhuma mídia ainda</h3>
+                <p>Fotos e vídeos que você compartilhar aparecerão aqui</p>
+            </div>
+        </div>
+
+        <div class="tab-content hidden" id="likesContent">
+            <div class="empty-state">
+                <div class="empty-icon">❤️</div>
+                <h3>Nenhuma curtida ainda</h3>
+                <p>Publicações que você curtir aparecerão aqui</p>
+            </div>
+        </div>
     </div>
- 
+
+    <!-- Popup de Editar Perfil -->
+    <div id="editProfilePopup" class="popup-overlay hidden">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h2>Editar Perfil</h2>
+                <button class="close-popup" id="closeEditPopup">❌</button>
+            </div>
+            
+            <div class="popup-body">
+                <div class="form-group">
+                    <label>Nome Completo</label>
+                    <input type="text" id="editName" class="input" placeholder="Seu nome completo">
+                </div>
+
+                <div class="form-group">
+                    <label>Nome de Usuário</label>
+                    <input type="text" id="editUsername" class="input" placeholder="@seu_usuario">
+                    <p class="validation-msg" id="editUsernameValidation"></p>
+                </div>
+
+                <div class="form-group">
+                    <label>Bio</label>
+                    <textarea id="editBio" class="input textarea" placeholder="Conte um pouco sobre você..." rows="4" maxlength="200"></textarea>
+                    <p class="char-count"><span id="bioCharCount">0</span>/200</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="editEmail" class="input" placeholder="seu@email.com">
+                </div>
+
+                <div class="popup-actions">
+                    <button class="btn-secondary" id="cancelEdit">Cancelar</button>
+                    <button class="btn-primary" id="saveEdit">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="perfil.js"></script>
-   
 </body>
 </html>

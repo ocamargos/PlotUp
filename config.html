@@ -3,65 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlotUp</title>
+    <title>PlotUp - Configurações</title>
     <link rel="stylesheet" href="config.css">
 </head>
 <body>
  
     <header>
- 
         <div class="container">
- 
             <a href="index.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
- 
             <a href="home.html">Home</a>
             <a href="pesquisar.html">Pesquisa</a>
             <a href="">Explorar</a>
             <a href="perfil.html">Perfil</a>
             <a href="config.html">Configuração</a>
- 
         </div>
- 
     </header>
 
-    
     <div class="card_info_pessoal">
-
-        <img src="midias/logo com fundo.png" alt="Foto De Perfil" class="foto_perfil">
-        Nome Completo Do Usuário: José Augusto Gondin Camargos
-
-        <p>Nome De Usuário: ocamargos</p>
-
-        <p>ID: 000.000.001</p>
-
+        <div class="foto_perfil_container">
+            <div class="foto_perfil" id="fotoPerfilCirculo"></div>
+            <button class="change-photo-btn" id="changePhotoBtn">📷</button>
+        </div>
         
-        <p>Seguidores: 100</p>
-        <p>Seguindo: 50</p>
-
+        <h2 id="nomeCompletoHeader">Carregando...</h2>
+        <p id="nomeUsuarioHeader">@carregando</p>
+        <p id="idUsuario">ID: 000.000.000</p>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-number" id="seguidores">0</span>
+                <span class="stat-label">Seguidores</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number" id="seguindo">0</span>
+                <span class="stat-label">Seguindo</span>
+            </div>
+        </div>
     </div>
 
     <div class="editar_perfil">
         <p class="txt_card_ep">Informações Pessoais</p>
 
-        <p id="nome_completo">Nome Completo: José Augusto Gondin Camargos</p>
-        <p id="nome_usuario">Nome de Usuário: ocamargos</p>
-        <p id="nascimento">Data de Nascimento: 01/01/2000</p>
-        <p id="email">E-Mail: ocamargos@example.com</p>
-        <p id="telefone">Telefone (Celular): (00) 00000-0000</p>
+        <div class="info-item">
+            <span class="info-label">Nome Completo:</span>
+            <span id="nome_completo">Carregando...</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Nome de Usuário:</span>
+            <span id="nome_usuario">@carregando</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Data de Nascimento:</span>
+            <span id="nascimento">00/00/0000</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">E-Mail:</span>
+            <span id="email">carregando@example.com</span>
+        </div>
+        <div class="info-item">
+            <span class="info-label">Telefone:</span>
+            <span id="telefone">(00) 00000-0000</span>
+        </div>
 
         <div class="container_popup">
-            <button class="openBtn" popovertarget="popup">Editar Informações</button>
-            <div id="popup" class="conteudo_popup" popover>
-                <a href="" class="fechar_popup">❌</a>
-                <h2 class="titulo_alterar_informacoes">Alterar Informações</h2>
+            <button class="openBtn" popovertarget="popup_info_pessoais">Editar Informações</button>
+            <div id="popup_info_pessoais" class="conteudo_popup" popover>
+                <button class="fechar_popup" popovertarget="popup_info_pessoais" popovertargetaction="hide">❌</button>
+                <h2 class="titulo_alterar_informacoes">Alterar Informações Pessoais</h2>
 
                 <div class="alterar_info">
-
                     <label>Nome Completo:</label>
-                    <input type="text" id="input_nome_completo"  placeholder="Digite seu nome completo" class="input">
+                    <input type="text" id="input_nome_completo" placeholder="Digite seu nome completo" class="input">
 
                     <label>Nome de Usuário:</label>
                     <input type="text" id="input_nome_usuario" placeholder="Digite novo nome de usuário" class="input">
+                    <p class="validation-msg" id="usernameValidation"></p>
 
                     <label>Data de Nascimento:</label>
                     <input type="date" id="input_nascimento" class="input">
@@ -73,8 +89,8 @@
                     <input type="tel" id="input_telefone" placeholder="(00) 00000-0000" class="input">
 
                     <div class="salvar_cancelar">
-                        <button popovertarget="popup" popovertargetaction="hide" class="cancelar">Cancelar</button>
-                        <button popovertarget="popup" popovertargetaction="hide" class="salvar" >Salvar</button>
+                        <button popovertarget="popup_info_pessoais" popovertargetaction="hide" class="cancelar">Cancelar</button>
+                        <button class="salvar" id="salvarInfoPessoais">Salvar</button>
                     </div>
                 </div>
             </div>
@@ -83,23 +99,72 @@
 
     <div class="editar_informacoes_conta">
         <p class="txt_card_ic">Informações Da Conta</p>
-        <p>Privar Conta</p>
-        <p>Alterar Senha: ******</p>
-        <p>Idioma: Português</p>
-        <p>Tema: Claro</p>
-        <div class="popup_eic">
-            <button class="openBtn" popovertarget="popup">Editar Informações</button>
-
-            <div id="popup" popover="" class="conteudo_popup">
-                <p>ghjklç</p>
-            </div>
+        
+        <div class="info-item">
+            <span class="info-label">Conta Privada:</span>
+            <label class="switch">
+                <input type="checkbox" id="contaPrivada">
+                <span class="slider"></span>
+            </label>
         </div>
 
+        <div class="info-item">
+            <span class="info-label">Senha:</span>
+            <span>••••••••</span>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Idioma:</span>
+            <span id="idioma">Português</span>
+        </div>
+
+        <div class="info-item">
+            <span class="info-label">Tema:</span>
+            <label class="switch">
+                <input type="checkbox" id="temaEscuro">
+                <span class="slider"></span>
+            </label>
+            <span id="temaTexto">Claro</span>
+        </div>
+
+        <div class="popup_eic">
+            <button class="openBtn" popovertarget="popup_info_conta">Editar Configurações</button>
+
+            <div id="popup_info_conta" popover class="conteudo_popup">
+                <button class="fechar_popup" popovertarget="popup_info_conta" popovertargetaction="hide">❌</button>
+                <h2 class="titulo_alterar_informacoes">Configurações da Conta</h2>
+
+                <div class="alterar_info">
+                    <label>Senha Atual:</label>
+                    <input type="password" id="senhaAtual" placeholder="Digite sua senha atual" class="input">
+
+                    <label>Nova Senha:</label>
+                    <input type="password" id="novaSenha" placeholder="Digite a nova senha" class="input">
+
+                    <label>Confirmar Nova Senha:</label>
+                    <input type="password" id="confirmarSenha" placeholder="Confirme a nova senha" class="input">
+
+                    <label>Idioma:</label>
+                    <select id="selectIdioma" class="input">
+                        <option value="Português">Português</option>
+                        <option value="English">English</option>
+                        <option value="Español">Español</option>
+                    </select>
+
+                    <div class="salvar_cancelar">
+                        <button popovertarget="popup_info_conta" popovertargetaction="hide" class="cancelar">Cancelar</button>
+                        <button class="salvar" id="salvarInfoConta">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-
+    <div class="danger-zone">
+        <p class="txt_card_ic">Zona de Perigo</p>
+        <button class="danger-btn" id="excluirConta">Excluir Conta</button>
+    </div>
 
     <script src="config.js"></script>
-   
 </body>
 </html>

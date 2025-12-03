@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorar - PlotUp</title>
+    <link rel="stylesheet" href="explorar.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="home.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
+            <a href="home.html">Home</a>
+            <a href="pesquisar.html">Pesquisa</a>
+            <a href="explorar.html">Explorar</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="config.html">Configuração</a>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="explore-container">
+        <!-- SEARCH BAR -->
+        <div class="explore-header">
+            <div class="search-bar">
+                <span class="search-icon">🔍</span>
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Buscar posts, pessoas ou hashtags..."
+                    id="searchInput"
+                >
+            </div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="categories-section">
+            <h2 class="section-title">📂 Categorias</h2>
+            <div class="categories-grid" id="categoriesGrid">
+                <!-- Categories will be rendered by JavaScript -->
+            </div>
+        </div>
+
+        <!-- TRENDING POSTS -->
+        <div class="trending-section">
+            <h2 class="section-title">🔥 Posts em Alta</h2>
+            <div class="trending-grid" id="trendingGrid">
+                <!-- Trending posts will be rendered by JavaScript -->
+            </div>
+        </div>
+
+        <!-- POPULAR USERS -->
+        <div class="popular-section">
+            <h2 class="section-title">⭐ Criadores Populares</h2>
+            <div class="popular-grid" id="popularGrid">
+                <!-- Popular users will be rendered by JavaScript -->
+            </div>
+        </div>
+
+        <!-- RECOMMENDED CONTENT -->
+        <div class="recommended-section">
+            <h2 class="section-title">💡 Recomendado para Você</h2>
+            <div class="recommended-grid" id="recommendedGrid">
+                <!-- Recommended content will be rendered by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENT MODAL -->
+    <div class="modal-overlay hidden" id="contentModal">
+        <div class="modal-content-large">
+            <button class="close-modal" onclick="closeContentModal()">×</button>
+            <div class="modal-body-large" id="modalBodyContent">
+                <!-- Content details will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="explorar.js"></script>
+</body>
+</html>

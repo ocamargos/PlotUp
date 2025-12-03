@@ -1,43 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlotUp</title>
+    <title>Pesquisar - PlotUp</title>
     <link rel="stylesheet" href="pesquisar.css">
 </head>
 <body>
- 
+    <!-- HEADER -->
     <header>
- 
         <div class="container">
- 
-            <a href="index.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
- 
+            <a href="home.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
             <a href="home.html">Home</a>
             <a href="pesquisar.html">Pesquisa</a>
-            <a href="">Explorar</a>
+            <a href="explorar.html">Explorar</a>
             <a href="perfil.html">Perfil</a>
             <a href="config.html">Configuração</a>
- 
         </div>
- 
     </header>
 
+    <!-- MAIN CONTENT -->
     <div class="search-container">
-    <input type="text" id="search" placeholder="Pesquisar...">
+        <h1 class="page-title">🔍 Pesquisar</h1>
+
+        <!-- SEARCH SECTION -->
+        <div class="search-section">
+            <div class="search-bar">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    id="searchInput" 
+                    placeholder="Buscar por usuários, posts, hashtags..."
+                    autocomplete="off"
+                >
+                <button class="btn-search" onclick="performSearch()">
+                    Pesquisar
+                </button>
+            </div>
+
+            <div class="filters-title">⚙️ Filtros</div>
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label>Tipo de Conteúdo</label>
+                    <select id="typeFilter">
+                        <option value="">Todos</option>
+                        <option value="usuario">Usuários</option>
+                        <option value="post">Posts</option>
+                        <option value="hashtag">Hashtags</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Data</label>
+                    <select id="dateFilter">
+                        <option value="">Qualquer data</option>
+                        <option value="today">Hoje</option>
+                        <option value="week">Última semana</option>
+                        <option value="month">Último mês</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Categoria</label>
+                    <select id="categoryFilter">
+                        <option value="">Todas</option>
+                        <option value="tecnologia">Tecnologia</option>
+                        <option value="negocios">Negócios</option>
+                        <option value="design">Design</option>
+                        <option value="marketing">Marketing</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Popularidade</label>
+                    <select id="popularityFilter">
+                        <option value="">Qualquer</option>
+                        <option value="trending">Em alta</option>
+                        <option value="popular">Popular</option>
+                        <option value="new">Novos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div class="results-section">
+            <div class="results-header">
+                <div class="results-count" id="resultsCount">
+                    12 resultados encontrados
+                </div>
+                <select class="sort-select" id="sortSelect" onchange="handleSort()">
+                    <option value="relevance">Mais relevantes</option>
+                    <option value="newest">Mais recentes</option>
+                    <option value="popular">Mais populares</option>
+                    <option value="oldest">Mais antigos</option>
+                </select>
+            </div>
+
+            <div class="results-grid" id="resultsGrid">
+                <!-- Results will be inserted here -->
+            </div>
+
+            <div class="pagination">
+                <button class="page-btn">← Anterior</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Próxima →</button>
+            </div>
+        </div>
     </div>
 
-    <ul id="list">
-        <li>UserName</li>
-        <li>UserName</li>
-        <li>UserName</li>
-        <li>UserName</li>
-        <li>UserName</li>
-        <li>UserName</li>
-    </ul>
- 
-    <script src="pesquisar.js"></script>
-   
+    <script src="js/pesquisar.js"></script>
 </body>
 </html>

@@ -408,8 +408,44 @@ function showNotification(message) {
     }, 3000);
 }
 
+// ====== VERIFICAÇÃO DE LOGIN ======
+function checkLogin() {
+    const currentUser = localStorage.getItem('loggedUser');
+    if (!currentUser) {
+        alert('Você precisa fazer login primeiro!');
+        window.location.href = 'index.html';
+        return null;
+    }
+    return JSON.parse(currentUser);
+}
+
+// ====== APLICAR TEMA ======
+function applyTheme() {
+    const currentUser = checkLogin();
+    if (currentUser && currentUser.settings && currentUser.settings.temaEscuro) {
+        document.body.classList.add('dark-theme');
+    }
+}
+
+// ====== HIGHLIGHT ACTIVE PAGE ======
+function highlightActivePage() {
+    const links = document.querySelectorAll('header a');
+    const currentPage = window.location.pathname.split('/').pop();
+    
+    links.forEach(link => {
+        const linkPage = link.getAttribute('href');
+        if (linkPage === currentPage) {
+            link.classList.add('active');
+        }
+    });
+}
+
 // ====== INITIALIZATION ======
 document.addEventListener('DOMContentLoaded', () => {
+    checkLogin();
+    applyTheme();
+    highlightActivePage();
+    
     renderCategories();
     renderTrendingPosts();
     renderPopularUsers();

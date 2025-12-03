@@ -10,6 +10,56 @@ body {
     min-height: 100vh;
 }
 
+/* ====== TEMA ESCURO ====== */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-theme .explore-container,
+body.dark-theme .category-card,
+body.dark-theme .trending-card,
+body.dark-theme .popular-card,
+body.dark-theme .recommended-card,
+body.dark-theme .search-bar,
+body.dark-theme .modal-content-large {
+    background: #2a2a2a;
+    color: #e0e0e0;
+}
+
+body.dark-theme .section-title,
+body.dark-theme .category-name,
+body.dark-theme .trending-title,
+body.dark-theme .trending-author-name,
+body.dark-theme .popular-name,
+body.dark-theme .recommended-author-name {
+    color: #e0e0e0;
+}
+
+body.dark-theme .category-count,
+body.dark-theme .trending-description,
+body.dark-theme .popular-bio,
+body.dark-theme .recommended-content,
+body.dark-theme .search-input {
+    color: #b0b0b0;
+}
+
+body.dark-theme .search-input {
+    background: #2a2a2a;
+}
+
+body.dark-theme .search-bar {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+
+body.dark-theme ::-webkit-scrollbar-thumb {
+    background: rgb(185, 62, 62);
+}
+
 /* ====== HEADER ====== */
 header {
     background: rgb(165, 42, 42);
@@ -47,6 +97,11 @@ header a {
 
 header a:hover {
     background: rgba(255, 255, 255, 0.15);
+}
+
+header a.active {
+    background: rgba(255, 255, 255, 0.25);
+    font-weight: 600;
 }
 
 /* ====== EXPLORE CONTAINER ====== */

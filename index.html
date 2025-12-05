@@ -1,116 +1,191 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PlotUp</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Home - PlotUp</title>
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
-
-    <div class="container">
-        <!-- Tela de Login/Cadastro -->
-        <div id="mainScreen">
-            <div class="header">
-                <h1 class="logo">PlopUp</h1>
-                <p class="subtitle">Conecte-se com o mundo</p>
-            </div>
-
-            <div class="tab-buttons">
-                <button class="tab-btn active" id="loginTab">Login</button>
-                <button class="tab-btn" id="signupTab">Cadastro</button>
-            </div>
-
-            <!-- Formulário de Login -->
-            <div id="loginForm">
-                <div class="form-group">
-                    <label>Email ou Nome de Usuário</label>
-                    <input type="text" id="loginIdentifier" placeholder="Digite seu email ou usuário">
-                </div>
-
-                <div class="form-group">
-                    <label>Senha</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="loginPassword" placeholder="Digite sua senha">
-                        <button class="toggle-password" id="toggleLoginPassword">
-                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="forgot-password">
-                    <a href="#" class="forgot-link" id="forgotLink">Esqueceu a senha?</a>
-                </div>
-
-                <button class="submit-btn" id="loginBtn" >Entrar</button>
-            </div>
-
-            <!-- Formulário de Cadastro -->
-            <div id="signupForm" class="hidden">
-                <div class="form-group">
-                    <label>Nome Completo</label>
-                    <input type="text" id="fullName" placeholder="Seu nome completo">
-                </div>
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" id="email" placeholder="seu@email.com">
-                </div>
-
-                <div class="form-group">
-                    <label>Data de Nascimento</label>
-                    <input type="date" id="birthDate">
-                </div>
-
-                <div class="form-group">
-                    <label>Nome de Usuário</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="username" placeholder="escolha_seu_usuario" minlength="3">
-                        <span class="username-icon" id="usernameIcon"></span>
-                    </div>
-                    <p class="validation-msg" id="usernameMsg"></p>
-                </div>
-
-                <div class="form-group">
-                    <label>Senha</label>
-                    <div class="input-wrapper">
-                        <input type="password" id="password" placeholder="Crie uma senha segura" minlength="6">
-                        <button class="toggle-password" id="toggleSignupPassword">
-                            <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <p class="helper-text">Mínimo de 6 caracteres</p>
-                </div>
-
-                <button class="submit-btn" id="signupBtn">Criar Conta</button>
-            </div>
+    <!-- HEADER -->
+    <header>
+        <div class="container">
+            <a href="home.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
+            <a href="home.html">Home</a>
+            <a href="pesquisar.html">Pesquisa</a>
+            <a href="explorar.html">Explorar</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="config.html">Configuração</a>
         </div>
+    </header>
 
-        <!-- Tela de Recuperação de Senha -->
-        <div id="recoveryScreen" class="hidden">
-            <div class="header">
-                <h2 class="logo" style="font-size: 28px;">Recuperar Senha</h2>
-                <p class="subtitle">Digite seu email para receber instruções de recuperação</p>
+    <!-- MAIN CONTENT -->
+    <div class="home-container">
+        <!-- SIDEBAR LEFT -->
+        <aside class="sidebar-left">
+            <div class="profile-widget">
+                <div class="widget-cover"></div>
+                <div class="widget-content">
+                    <div class="widget-avatar">JD</div>
+                    <div class="widget-name">João Developer</div>
+                    <div class="widget-username">@joaodev</div>
+                    <div class="widget-stats">
+                        <div class="widget-stat">
+                            <span class="stat-value">245</span>
+                            <span class="stat-label">Seguidores</span>
+                        </div>
+                        <div class="widget-stat">
+                            <span class="stat-value">189</span>
+                            <span class="stat-label">Seguindo</span>
+                        </div>
+                    </div>
+                    <a href="perfil.html" class="btn-view-profile">Ver Perfil</a>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="recoveryEmail" placeholder="seu@email.com">
+            <div class="trending-widget">
+                <h3 class="widget-title">🔥 Em Alta</h3>
+                <div class="trending-list">
+                    <div class="trending-item">
+                        <div class="trending-tag">#DesignThinking</div>
+                        <div class="trending-count">2.5k posts</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-tag">#IA2024</div>
+                        <div class="trending-count">1.8k posts</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-tag">#StartupLife</div>
+                        <div class="trending-count">1.2k posts</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-tag">#RemoteWork</div>
+                        <div class="trending-count">890 posts</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- FEED -->
+        <main class="feed">
+            <!-- CREATE POST -->
+            <div class="create-post">
+                <div class="create-post-header">
+                    <div class="create-avatar">JD</div>
+                    <input 
+                        type="text" 
+                        class="create-input" 
+                        placeholder="No que você está pensando, João?"
+                        readonly
+                        onclick="openCreatePostModal()"
+                    >
+                </div>
+                <div class="create-actions">
+                    <button class="create-action-btn" onclick="openCreatePostModal()">
+                        📸 Foto
+                    </button>
+                    <button class="create-action-btn" onclick="openCreatePostModal()">
+                        🎥 Vídeo
+                    </button>
+                    <button class="create-action-btn" onclick="openCreatePostModal()">
+                        📊 Enquete
+                    </button>
+                    <button class="create-action-btn" onclick="openCreatePostModal()">
+                        📝 Artigo
+                    </button>
+                </div>
             </div>
 
-            <button class="submit-btn" id="recoveryBtn">Enviar Email de Recuperação</button>
-            <button class="back-btn" id="backBtn">Voltar ao Login</button>
+            <!-- POSTS FEED -->
+            <div class="posts-container" id="postsContainer">
+                <!-- Posts will be rendered here by JavaScript -->
+            </div>
+        </main>
+
+        <!-- SIDEBAR RIGHT -->
+        <aside class="sidebar-right">
+            <div class="suggestions-widget">
+                <h3 class="widget-title">👥 Sugestões para Seguir</h3>
+                <div class="suggestions-list">
+                    <div class="suggestion-item">
+                        <div class="suggestion-avatar">MC</div>
+                        <div class="suggestion-info">
+                            <div class="suggestion-name">Marina Costa</div>
+                            <div class="suggestion-username">@marinacosta</div>
+                        </div>
+                        <button class="btn-follow">Seguir</button>
+                    </div>
+                    <div class="suggestion-item">
+                        <div class="suggestion-avatar">AS</div>
+                        <div class="suggestion-info">
+                            <div class="suggestion-name">Ana Silva</div>
+                            <div class="suggestion-username">@anasilva</div>
+                        </div>
+                        <button class="btn-follow">Seguir</button>
+                    </div>
+                    <div class="suggestion-item">
+                        <div class="suggestion-avatar">PS</div>
+                        <div class="suggestion-info">
+                            <div class="suggestion-name">Pedro Santos</div>
+                            <div class="suggestion-username">@pedrosantos</div>
+                        </div>
+                        <button class="btn-follow">Seguir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="quick-links-widget">
+                <h3 class="widget-title">⚡ Links Rápidos</h3>
+                <div class="quick-links">
+                    <a href="#" class="quick-link">📖 Central de Ajuda</a>
+                    <a href="#" class="quick-link">🔒 Privacidade</a>
+                    <a href="#" class="quick-link">📋 Termos de Uso</a>
+                    <a href="#" class="quick-link">💼 Carreiras</a>
+                </div>
+            </div>
+
+            <div class="footer-widget">
+                <p>© 2024 PlotUp. Todos os direitos reservados.</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- CREATE POST MODAL -->
+    <div class="modal-overlay hidden" id="createPostModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Criar Post</h2>
+                <button class="close-modal" onclick="closeCreatePostModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-user">
+                    <div class="modal-avatar">JD</div>
+                    <div class="modal-user-info">
+                        <div class="modal-name">João Developer</div>
+                        <div class="modal-username">@joaodev</div>
+                    </div>
+                </div>
+                <textarea 
+                    class="post-textarea" 
+                    placeholder="No que você está pensando?"
+                    id="postContent"
+                ></textarea>
+                <div class="char-count">
+                    <span id="charCount">0</span> / 500
+                </div>
+                <div class="modal-actions-bottom">
+                    <div class="modal-tools">
+                        <button class="tool-btn" title="Adicionar imagem">📸</button>
+                        <button class="tool-btn" title="Adicionar vídeo">🎥</button>
+                        <button class="tool-btn" title="Adicionar emoji">😊</button>
+                        <button class="tool-btn" title="Adicionar localização">📍</button>
+                    </div>
+                    <button class="btn-post" onclick="createPost()">Publicar</button>
+                </div>
+            </div>
         </div>
     </div>
- 
-    <script src="index.js"></script>
-   
+
+    <script src="home.js"></script>
 </body>
 </html>
-    

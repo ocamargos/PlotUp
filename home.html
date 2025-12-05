@@ -6,12 +6,17 @@
     <title>Home - PlotUp</title>
     <link rel="stylesheet" href="home.css">
 </head>
+
+<!-- SEMPRE PRIMEIRO -->
+<script src="user-session.js"></script>
+<!-- Depois o script específico da página -->
+<script src="home.js"></script>
 <body>
     <!-- HEADER -->
     <header>
         <div class="container">
             <a href="home.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
-            <a href="home.html">Home</a>
+            <a href="home.html" class="active">Home</a>
             <a href="pesquisar.html">Pesquisa</a>
             <a href="explorar.html">Explorar</a>
             <a href="perfil.html">Perfil</a>
@@ -26,16 +31,16 @@
             <div class="profile-widget">
                 <div class="widget-cover"></div>
                 <div class="widget-content">
-                    <div class="widget-avatar">JD</div>
-                    <div class="widget-name">João Developer</div>
-                    <div class="widget-username">@joaodev</div>
+                    <div class="widget-avatar" data-user-avatar>JD</div>
+                    <div class="widget-name" data-user-name>João Developer</div>
+                    <div class="widget-username" data-user-username>@joaodev</div>
                     <div class="widget-stats">
                         <div class="widget-stat">
-                            <span class="stat-value">245</span>
+                            <span class="stat-value" data-user-seguidores>245</span>
                             <span class="stat-label">Seguidores</span>
                         </div>
                         <div class="widget-stat">
-                            <span class="stat-value">189</span>
+                            <span class="stat-value" data-user-seguindo>189</span>
                             <span class="stat-label">Seguindo</span>
                         </div>
                     </div>
@@ -71,11 +76,12 @@
             <!-- CREATE POST -->
             <div class="create-post">
                 <div class="create-post-header">
-                    <div class="create-avatar">JD</div>
+                    <div class="create-avatar" data-user-avatar>JD</div>
                     <input 
                         type="text" 
                         class="create-input" 
-                        placeholder="No que você está pensando, João?"
+                        data-user-placeholder="No que você está pensando, {name}?"
+                        placeholder="No que você está pensando?"
                         readonly
                         onclick="openCreatePostModal()"
                     >
@@ -141,6 +147,7 @@
                     <a href="#" class="quick-link">🔒 Privacidade</a>
                     <a href="#" class="quick-link">📋 Termos de Uso</a>
                     <a href="#" class="quick-link">💼 Carreiras</a>
+                    <a href="#" class="quick-link" onclick="event.preventDefault(); logout();">🚪 Sair</a>
                 </div>
             </div>
 
@@ -159,10 +166,10 @@
             </div>
             <div class="modal-body">
                 <div class="modal-user">
-                    <div class="modal-avatar">JD</div>
+                    <div class="modal-avatar" data-user-avatar>JD</div>
                     <div class="modal-user-info">
-                        <div class="modal-name">João Developer</div>
-                        <div class="modal-username">@joaodev</div>
+                        <div class="modal-name" data-user-name>João Developer</div>
+                        <div class="modal-username" data-user-username>@joaodev</div>
                     </div>
                 </div>
                 <textarea 
@@ -186,6 +193,8 @@
         </div>
     </div>
 
+    <!-- IMPORTANTE: Carregar o sistema de sessão ANTES do home.js -->
+    <script src="user-session.js"></script>
     <script src="home.js"></script>
 </body>
 </html>

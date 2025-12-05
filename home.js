@@ -1,3 +1,11 @@
+// ====== OBTER USUÁRIO LOGADO ======
+const currentUser = getCurrentUser();
+
+if (!currentUser) {
+    alert("Você precisa fazer login primeiro!");
+    window.location.href = "login.html";
+}
+
 // ====== SAMPLE POSTS DATA ======
 const samplePosts = [
     {
@@ -160,7 +168,6 @@ function toggleLike(postId) {
 // ====== OPEN COMMENTS ======
 function openComments(postId) {
     console.log('Opening comments for post:', postId);
-    // Implementar modal de comentários aqui
     alert('Funcionalidade de comentários em desenvolvimento!');
 }
 
@@ -170,7 +177,6 @@ function sharePost(postId) {
     if (post) {
         post.shares += 1;
         renderPosts();
-        // Feedback visual
         showNotification('Post compartilhado com sucesso!');
     }
 }
@@ -187,7 +193,6 @@ function closeCreatePostModal() {
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
     
-    // Limpar textarea
     document.getElementById('postContent').value = '';
     updateCharCount();
 }
@@ -206,13 +211,13 @@ function createPost() {
         return;
     }
 
-    // Criar novo post
+    // Usar dados do usuário logado
     const newPost = {
-        id: posts.length + 1,
+        id: Date.now(),
         author: {
-            name: 'João Developer',
-            username: 'joaodev',
-            avatar: 'JD'
+            name: currentUser.nomeCompleto,
+            username: currentUser.username,
+            avatar: getInitials(currentUser.nomeCompleto)
         },
         content: content,
         image: null,
@@ -223,16 +228,10 @@ function createPost() {
         liked: false
     };
 
-    // Adicionar no início do array
     posts.unshift(newPost);
-    
-    // Renderizar posts
     renderPosts();
-    
-    // Fechar modal
     closeCreatePostModal();
     
-    // Feedback visual
     showNotification('Post publicado com sucesso! 🎉');
 }
 
@@ -248,7 +247,6 @@ function updateCharCount() {
 
 // ====== NOTIFICATION ======
 function showNotification(message) {
-    // Criar elemento de notificação
     const notification = document.createElement('div');
     notification.style.cssText = `
         position: fixed;
@@ -265,10 +263,8 @@ function showNotification(message) {
     `;
     notification.textContent = message;
     
-    // Adicionar ao body
     document.body.appendChild(notification);
     
-    // Remover após 3 segundos
     setTimeout(() => {
         notification.style.animation = 'slideOutRight 0.4s ease-out';
         setTimeout(() => {
@@ -295,23 +291,19 @@ document.addEventListener('click', (e) => {
 
 // ====== EVENT LISTENERS ======
 document.addEventListener('DOMContentLoaded', () => {
-    // Renderizar posts iniciais
     renderPosts();
     
-    // Adicionar listener para textarea
     const textarea = document.getElementById('postContent');
     if (textarea) {
         textarea.addEventListener('input', updateCharCount);
     }
     
-    // Fechar modal ao clicar fora
     document.getElementById('createPostModal').addEventListener('click', (e) => {
         if (e.target.classList.contains('modal-overlay')) {
             closeCreatePostModal();
         }
     });
     
-    // Atalho de teclado para fechar modal (ESC)
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             const modal = document.getElementById('createPostModal');
@@ -321,7 +313,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     
-    // Atalho de teclado para publicar (Ctrl/Cmd + Enter)
     textarea?.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
             createPost();
@@ -355,3 +346,5 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+console.log("✅ Home carregado para:", currentUser.nomeCompleto);

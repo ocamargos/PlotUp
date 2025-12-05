@@ -1,4 +1,3 @@
-
 // ==================== Supabase Config ====================
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
@@ -6,44 +5,21 @@ const supabaseUrl = 'https://oxlhawuluhnwzixygwmy.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94bGhhd3VsdWhud3ppeHlnd215Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ4MDMzMDcsImV4cCI6MjA4MDM3OTMwN30.wSUfof-IqLXWyIUhq45hXnxGCxrg-szNjlVohIqXXtM';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-// ==================== Render Results ====================
-function renderResults(results) {
-    const grid = document.getElementById('resultsGrid');
+// ==================== Event Listeners ====================
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const typeFilter = document.getElementById('typeFilter');
+    const categoryFilter = document.getElementById('categoryFilter');
 
-    if (results.length === 0) {
-        grid.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">😔</div>
-                <h3>Nenhum resultado encontrado</h3>
-                <p>Tente ajustar seus filtros ou termos de pesquisa</p>
-            </div>
-        `;
-        document.getElementById('resultsCount').textContent = '0 resultados encontrados';
-        return;
-    }
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') performSearch();
+    });
 
-    grid.innerHTML = results.map(result => `
-        <div class="result-card">
-            <div class="result-user">
-                <div class="result-avatar">${result.avatar || result.full_name[0]}</div>
-                <div class="result-user-info">
-                    <div class="result-name">${result.full_name}</div>
-                    <div class="result-username">@${result.username}</div>
-                </div>
-            </div>
-            <div class="result-content">${result.content || ''}</div>
-            <div class="result-meta">
-                ${result.date ? `<span>🕐 ${result.date}</span>` : ''}
-                ${result.category ? `<span>📁 ${result.category}</span>` : ''}
-                ${result.stats ? `<span>${result.stats}</span>` : ''}
-            </div>
-            ${result.badge ? `<div style="margin-top: 12px;"><span class="result-badge">${result.badge}</span></div>` : ''}
-        </div>
-    `).join('');
+    typeFilter.addEventListener('change', performSearch);
+    categoryFilter.addEventListener('change', performSearch);
 
-    document.getElementById('resultsCount').textContent = 
-        `${results.length} resultado${results.length !== 1 ? 's' : ''} encontrado${results.length !== 1 ? 's' : ''}`;
-}
+    performSearch(); // busca inicial
+});
 
 // ==================== Search Function ====================
 async function performSearch() {
@@ -70,7 +46,7 @@ async function performSearch() {
                 avatar: u.full_name[0],
                 content: '',
                 badge: '',
-                stats: '', 
+                stats: '',
             })));
         }
     }
@@ -107,15 +83,41 @@ async function performSearch() {
     renderResults(results);
 }
 
-// ==================== Event Listeners ====================
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('searchInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') performSearch();
-    });
+// ==================== Render Results ====================
+function renderResults(results) {
+    const grid = document.getElementById('resultsGrid');
 
-    document.getElementById('typeFilter').addEventListener('change', performSearch);
-    document.getElementById('categoryFilter').addEventListener('change', performSearch);
+    if (results.length === 0) {
+        grid.innerHTML = `
+            <div class="empty-state">
+                <div class="empty-icon">😔</div>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente ajustar seus filtros ou termos de pesquisa</p>
+            </div>
+        `;
+        document.getElementById('resultsCount').textContent = '0 resultados encontrados';
+        return;
+    }
 
-    // Inicial render (todos)
-    performSearch();
-});
+    grid.innerHTML = results.map(result => `
+        <div class="result-card">
+            <div class="result-user">
+                <div class="result-avatar">${result.avatar || result.full_name[0]}</div>
+                <div class="result-user-info">
+                    <div class="result-name">${result.full_name}</div>
+                    <div class="result-username">@${result.username}</div>
+                </div>
+            </div>
+            <div class="result-content">${result.content || ''}</div>
+            <div class="result-meta">
+                ${result.date ? `<span>🕐 ${result.date}</span>` : ''}
+                ${result.category ? `<span>📁 ${result.category}</span>` : ''}
+                ${result.stats ? `<span>${result.stats}</span>` : ''}
+            </div>
+            ${result.badge ? `<div style="margin-top: 12px;"><span class="result-badge">${result.badge}</span></div>` : ''}
+        </div>
+    `).join('');
+
+    document.getElementById('resultsCount').textContent =
+        `${results.length} resultado${results.length !== 1 ? 's' : ''} encontrado${results.length !== 1 ? 's' : ''}`;
+}

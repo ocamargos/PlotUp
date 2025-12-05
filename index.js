@@ -1,12 +1,14 @@
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = 'https://oxlhawuluhnwzixygwmy.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im94bGhhd3VsdWhud3ppeHlnd215Iiwicm9sZS...';
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // -----------------------------
 // ESTADO DA APLICAÇÃO
 // -----------------------------
-let isLogin = true;
+let isLogin = true; // Define qual aba está ativa
 let usernameStatus = null;
-
-// Carrega usuários do banco (normalizados)
-let users = JSON.parse(localStorage.getItem("users")) || [];
 
 // -----------------------------
 // ELEMENTOS DO DOM
@@ -18,14 +20,12 @@ const signupTab = document.getElementById('signupTab');
 const loginForm = document.getElementById('loginForm');
 const signupForm = document.getElementById('signupForm');
 
-// Login
 const loginIdentifier = document.getElementById('loginIdentifier');
 const loginPassword = document.getElementById('loginPassword');
 const toggleLoginPassword = document.getElementById('toggleLoginPassword');
 const loginBtn = document.getElementById('loginBtn');
 const forgotLink = document.getElementById('forgotLink');
 
-// Cadastro
 const fullName = document.getElementById('fullName');
 const email = document.getElementById('email');
 const birthDate = document.getElementById('birthDate');
@@ -35,11 +35,9 @@ const toggleSignupPassword = document.getElementById('toggleSignupPassword');
 const usernameMsg = document.getElementById('usernameMsg');
 const signupBtn = document.getElementById('signupBtn');
 
-// Recuperação
 const recoveryEmail = document.getElementById('recoveryEmail');
 const recoveryBtn = document.getElementById('recoveryBtn');
 const backBtn = document.getElementById('backBtn');
-
 
 // -----------------------------
 // HELPERS
@@ -47,21 +45,6 @@ const backBtn = document.getElementById('backBtn');
 function normalize(text) {
     return String(text || "").trim().toLowerCase();
 }
-
-function saveUsers() {
-    localStorage.setItem("users", JSON.stringify(users));
-}
-
-function usernameExists(rawUsername) {
-    const u = normalize(rawUsername);
-    return users.some(user => normalize(user.username) === u);
-}
-
-function emailExists(rawEmail) {
-    const e = normalize(rawEmail);
-    return users.some(user => normalize(user.email) === e);
-}
-
 
 // -----------------------------
 // NAVEGAÇÃO ENTRE ABAS
@@ -94,126 +77,84 @@ backBtn.addEventListener('click', () => {
     recoveryEmail.value = '';
 });
 
-
 // -----------------------------
 // VISIBILIDADE DAS SENHAS
 // -----------------------------
 toggleLoginPassword.addEventListener('click', () => {
-    const type = loginPassword.type === 'password' ? 'text' : 'password';
-    loginPassword.type = type;
+    loginPassword.type = loginPassword.type === 'password' ? 'text' : 'password';
 });
-
 toggleSignupPassword.addEventListener('click', () => {
-    const type = password.type === 'password' ? 'text' : 'password';
-    password.type = type;
+    password.type = password.type === 'password' ? 'text' : 'password';
 });
 
+// -----------------------------
+// VERIFICAÇÕES SUPABASE
+// -----------------------------
+async function usernameExists(rawUsername) {
+    const { data } = await supabase.from('users').select('id').eq('username', rawUsername).single();
+    return !!data;
+}
+
+async function emailExists(rawEmail) {
+    const { data } = await supabase.from('users').select('id').eq('email', rawEmail).single();
+    return !!data;
+}
 
 // -----------------------------
-// VALIDAÇÃO DE USERNAME (TEMPO REAL)
-// FORÇA minúsculas e impede uppercase SEM FALHA
+// CADASTRO
 // -----------------------------
-username.addEventListener("input", (e) => {
-
-    // força lowercase SEMPRE
-    const forced = e.target.value.toLowerCase();
-
-    if (e.target.value !== forced) {
-        e.target.value = forced;
-    }
-
-    const value = forced.trim();
-
-    if (value.length >= 3) {
-        if (usernameExists(value)) {
-            usernameStatus = "taken";
-            username.classList.add("error");
-            username.classList.remove("success");
-            usernameMsg.textContent = "Este nome de usuário já está em uso";
-            usernameMsg.className = "validation-msg error";
-        } else {
-            usernameStatus = "available";
-            username.classList.remove("error");
-            username.classList.add("success");
-            usernameMsg.textContent = "Nome de usuário disponível!";
-            usernameMsg.className = "validation-msg success";
-        }
-    } else {
-        usernameStatus = null;
-        username.classList.remove("error", "success");
-        usernameMsg.textContent = "";
-    }
-});
-
-// evita uppercase em colagem
-username.addEventListener("paste", (e) => {
-    e.preventDefault();
-    const pasted = (e.clipboardData || window.clipboardData).getData('text');
-    const normalized = pasted.toLowerCase();
-    username.value = normalized;
-    username.dispatchEvent(new Event('input'));
-});
-
-
-// -----------------------------
-// CADASTRO (CORRIGIDO 100%)
-// -----------------------------
-signupBtn.addEventListener("click", () => {
-
+signupBtn.addEventListener('click', async () => {
     const cleanEmail = normalize(email.value);
     const cleanUsername = normalize(username.value);
     const cleanBirth = (birthDate.value || "").trim();
     const cleanPassword = (password.value || "").trim();
     const cleanFullName = (fullName.value || "").trim();
 
-    // campos obrigatórios
     if (!cleanEmail || !cleanBirth || !cleanUsername || !cleanPassword) {
-        alert("Por favor, preencha todos os campos obrigatórios (Nome Completo é opcional).");
+        alert("Preencha todos os campos obrigatórios!");
         return;
     }
 
-    // *** VERIFICAÇÃO INFALÍVEL DE MAIÚSCULAS ***
     if (username.value !== cleanUsername) {
-        alert("O nome de usuário deve conter SOMENTE letras minúsculas.");
-        username.value = cleanUsername; // corrige automaticamente
+        alert("O nome de usuário deve ser minúsculo.");
+        username.value = cleanUsername;
         return;
     }
 
-    // username já existe?
-    if (usernameExists(cleanUsername)) {
-        alert("Este nome de usuário já está em uso. Escolha outro.");
+    if (await usernameExists(cleanUsername)) {
+        alert("Nome de usuário já existe.");
         return;
     }
 
-    // email já existe?
-    if (emailExists(cleanEmail)) {
-        alert("Este email já está cadastrado. Use outro.");
+    if (await emailExists(cleanEmail)) {
+        alert("Email já cadastrado.");
         return;
     }
 
-    // criar usuário
-    const newUser = {
-        fullName: cleanFullName || "",
-        email: cleanEmail,
-        birthDate: cleanBirth,
+    const { data, error } = await supabase.from('users').insert([{
+        full_name: cleanFullName,
         username: cleanUsername,
-        password: cleanPassword
-    };
+        email: cleanEmail,
+        password_hash: cleanPassword,
+        birth_date: cleanBirth
+    }]);
 
-    users.push(newUser);
-    saveUsers();
-
-    usernameStatus = "taken";
+    if (error) {
+        console.error(error);
+        alert("Erro ao criar usuário.");
+        return;
+    }
 
     alert("Cadastro realizado com sucesso!");
-    window.location.href = "home.html";
+    loginTab.click(); // volta para aba de login
 });
-
 
 // -----------------------------
 // LOGIN
 // -----------------------------
-loginBtn.addEventListener("click", () => {
+loginBtn.addEventListener('click', async () => {
+    if (!isLogin) return; // só funciona na aba login
+
     const idRaw = (loginIdentifier.value || "").trim();
     const pass = (loginPassword.value || "").trim();
 
@@ -222,30 +163,22 @@ loginBtn.addEventListener("click", () => {
         return;
     }
 
+    const normalizedId = normalize(idRaw);
     const isEmail = idRaw.includes("@");
 
-    // se for username, tem que ser minúsculo
-    if (!isEmail && idRaw !== idRaw.toLowerCase()) {
-        alert("Para fazer login com NOME DE USUÁRIO, digite apenas letras minúsculas.");
-        return;
-    }
+    let query = supabase.from('users').select('*');
+    query = isEmail ? query.eq('email', normalizedId) : query.eq('username', normalizedId);
 
-    const normalizedId = normalize(idRaw);
+    const { data, error } = await query.single();
 
-    const foundUser = users.find(u =>
-        (normalize(u.username) === normalizedId || normalize(u.email) === normalizedId)
-        && u.password === pass
-    );
-
-    if (!foundUser) {
+    if (error || !data || data.password_hash !== pass) {
         alert("Usuário não encontrado ou senha incorreta!");
         return;
     }
 
-    localStorage.setItem("loggedUser", JSON.stringify(foundUser));
+    localStorage.setItem("loggedUser", JSON.stringify(data));
     window.location.href = "home.html";
 });
-
 
 // -----------------------------
 // RECUPERAÇÃO DE SENHA
@@ -257,6 +190,6 @@ recoveryBtn.addEventListener('click', () => {
         mainScreen.classList.remove('hidden');
         recoveryEmail.value = "";
     } else {
-        alert("Por favor, digite seu email.");
+        alert("Digite seu email.");
     }
 });

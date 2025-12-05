@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesquisar - PlotUp</title>
     <link rel="stylesheet" href="pesquisar.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <!-- HEADER -->
@@ -33,9 +34,7 @@
                     placeholder="Buscar por usuários, posts, hashtags..."
                     autocomplete="off"
                 >
-                <button class="btn-search" onclick="performSearch()">
-                    Pesquisar
-                </button>
+                <button class="btn-search" onclick="performSearch()">Pesquisar</button>
             </div>
 
             <div class="filters-title">⚙️ Filtros</div>
@@ -46,7 +45,6 @@
                         <option value="">Todos</option>
                         <option value="usuario">Usuários</option>
                         <option value="post">Posts</option>
-                        <option value="hashtag">Hashtags</option>
                     </select>
                 </div>
 
@@ -86,10 +84,8 @@
         <!-- RESULTS SECTION -->
         <div class="results-section">
             <div class="results-header">
-                <div class="results-count" id="resultsCount">
-                    12 resultados encontrados
-                </div>
-                <select class="sort-select" id="sortSelect" onchange="handleSort()">
+                <div class="results-count" id="resultsCount">0 resultados encontrados</div>
+                <select class="sort-select" id="sortSelect">
                     <option value="relevance">Mais relevantes</option>
                     <option value="newest">Mais recentes</option>
                     <option value="popular">Mais populares</option>
@@ -98,7 +94,7 @@
             </div>
 
             <div class="results-grid" id="resultsGrid">
-                <!-- Results will be inserted here -->
+                <!-- Resultados serão inseridos aqui -->
             </div>
 
             <div class="pagination">
@@ -111,6 +107,7 @@
         </div>
     </div>
 
-    <script src="js/pesquisar.js"></script>
+    <script type="module" src="pesquisar.js"></script>
+
 </body>
 </html>

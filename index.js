@@ -1,357 +1,123 @@
-// ====== SAMPLE POSTS DATA ======
-const samplePosts = [
-    {
-        id: 1,
-        author: {
-            name: 'Marina Costa',
-            username: 'marinacosta',
-            avatar: 'MC'
-        },
-        content: 'Acabei de lançar meu novo projeto! 🚀 Depois de 3 meses de trabalho intenso, finalmente está no ar. Muito feliz com o resultado e animada para receber feedbacks da comunidade! #DesignThinking #UXDesign',
-        image: null,
-        time: '2h atrás',
-        likes: 245,
-        comments: 32,
-        shares: 18,
-        liked: false
-    },
-    {
-        id: 2,
-        author: {
-            name: 'Carlos Mendes',
-            username: 'carlosm',
-            avatar: 'CM'
-        },
-        content: 'Dica do dia: A melhor forma de aprender é ensinando. Quando você explica um conceito para alguém, você consolida seu próprio conhecimento. 💡\n\nCompartilhe o que você sabe, ajude os outros a crescerem! 🌱',
-        image: null,
-        time: '5h atrás',
-        likes: 189,
-        comments: 28,
-        shares: 45,
-        liked: false
-    },
-    {
-        id: 3,
-        author: {
-            name: 'Ana Silva',
-            username: 'anasilva',
-            avatar: 'AS'
-        },
-        content: 'Reflexão sobre trabalho remoto: Não é sobre trabalhar de casa, é sobre ter flexibilidade para trabalhar de onde você for mais produtivo. Para mim, isso mudou tudo! 🏡💻 #RemoteWork #ProductivityTips',
-        image: null,
-        time: '8h atrás',
-        likes: 432,
-        comments: 67,
-        shares: 89,
-        liked: true
-    },
-    {
-        id: 4,
-        author: {
-            name: 'Pedro Santos',
-            username: 'pedrosantos',
-            avatar: 'PS'
-        },
-        content: 'Acabei de finalizar um curso incrível sobre IA e Machine Learning! 🤖✨ O futuro já chegou e as possibilidades são infinitas. Quem mais está estudando sobre o tema? #IA2024 #MachineLearning',
-        image: null,
-        time: '1d atrás',
-        likes: 567,
-        comments: 91,
-        shares: 123,
-        liked: false
-    },
-    {
-        id: 5,
-        author: {
-            name: 'Julia Oliveira',
-            username: 'juliaoliveira',
-            avatar: 'JO'
-        },
-        content: 'Design não é só sobre fazer as coisas bonitas. É sobre resolver problemas, criar experiências e facilitar a vida das pessoas. Quando você entende isso, tudo muda. 🎨✨ #DesignThinking',
-        image: null,
-        time: '1d atrás',
-        likes: 678,
-        comments: 84,
-        shares: 156,
-        liked: true
-    },
-    {
-        id: 6,
-        author: {
-            name: 'Rafael Lima',
-            username: 'rafaellima',
-            avatar: 'RL'
-        },
-        content: 'Minha jornada como desenvolvedor: Comecei há 5 anos sem saber nada de programação. Hoje trabalho com tecnologias que nem existiam quando comecei. A chave? Nunca parar de aprender! 💪 #StartupLife #DevLife',
-        image: null,
-        time: '2d atrás',
-        likes: 891,
-        comments: 142,
-        shares: 203,
-        liked: false
-    }
-];
 
-let posts = [...samplePosts];
+        const USERS_KEY = "plotup_users";
+        const CURRENT_USER_KEY = "loggedUser";
 
-// ====== RENDER POSTS ======
-function renderPosts() {
-    const container = document.getElementById('postsContainer');
-    
-    if (posts.length === 0) {
-        container.innerHTML = `
-            <div class="post-card">
-                <div style="text-align: center; padding: 40px 20px;">
-                    <div style="font-size: 48px; margin-bottom: 16px;">📭</div>
-                    <h3 style="font-size: 20px; color: #333; margin-bottom: 8px;">Nenhum post ainda</h3>
-                    <p style="font-size: 15px; color: #666;">Seja o primeiro a compartilhar algo!</p>
-                </div>
-            </div>
-        `;
-        return;
-    }
-
-    container.innerHTML = posts.map(post => `
-        <div class="post-card" data-post-id="${post.id}">
-            <div class="post-header">
-                <div class="post-user">
-                    <div class="post-avatar">${post.author.avatar}</div>
-                    <div class="post-user-info">
-                        <div class="post-name">${post.author.name}</div>
-                        <div class="post-username">@${post.author.username}</div>
-                        <div class="post-time">${post.time}</div>
-                    </div>
-                </div>
-                <button class="post-menu-btn">⋯</button>
-            </div>
-            
-            <div class="post-content">${post.content}</div>
-            
-            ${post.image ? `<img src="${post.image}" alt="Post image" class="post-image">` : ''}
-            
-            <div class="post-actions">
-                <button class="action-btn ${post.liked ? 'active' : ''}" onclick="toggleLike(${post.id})">
-                    ${post.liked ? '❤️' : '🤍'} ${post.likes}
-                </button>
-                <button class="action-btn" onclick="openComments(${post.id})">
-                    💬 ${post.comments}
-                </button>
-                <button class="action-btn" onclick="sharePost(${post.id})">
-                    🔄 ${post.shares}
-                </button>
-                <button class="action-btn">
-                    📤 Compartilhar
-                </button>
-            </div>
-        </div>
-    `).join('');
-}
-
-// ====== LIKE POST ======
-function toggleLike(postId) {
-    const post = posts.find(p => p.id === postId);
-    if (post) {
-        post.liked = !post.liked;
-        post.likes += post.liked ? 1 : -1;
-        renderPosts();
-    }
-}
-
-// ====== OPEN COMMENTS ======
-function openComments(postId) {
-    console.log('Opening comments for post:', postId);
-    // Implementar modal de comentários aqui
-    alert('Funcionalidade de comentários em desenvolvimento!');
-}
-
-// ====== SHARE POST ======
-function sharePost(postId) {
-    const post = posts.find(p => p.id === postId);
-    if (post) {
-        post.shares += 1;
-        renderPosts();
-        // Feedback visual
-        showNotification('Post compartilhado com sucesso!');
-    }
-}
-
-// ====== CREATE POST MODAL ======
-function openCreatePostModal() {
-    const modal = document.getElementById('createPostModal');
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeCreatePostModal() {
-    const modal = document.getElementById('createPostModal');
-    modal.classList.add('hidden');
-    document.body.style.overflow = 'auto';
-    
-    // Limpar textarea
-    document.getElementById('postContent').value = '';
-    updateCharCount();
-}
-
-// ====== CREATE POST ======
-function createPost() {
-    const content = document.getElementById('postContent').value.trim();
-    
-    if (!content) {
-        alert('Por favor, escreva algo antes de publicar!');
-        return;
-    }
-
-    if (content.length > 500) {
-        alert('O post deve ter no máximo 500 caracteres!');
-        return;
-    }
-
-    // Criar novo post
-    const newPost = {
-        id: posts.length + 1,
-        author: {
-            name: 'João Developer',
-            username: 'joaodev',
-            avatar: 'JD'
-        },
-        content: content,
-        image: null,
-        time: 'Agora',
-        likes: 0,
-        comments: 0,
-        shares: 0,
-        liked: false
-    };
-
-    // Adicionar no início do array
-    posts.unshift(newPost);
-    
-    // Renderizar posts
-    renderPosts();
-    
-    // Fechar modal
-    closeCreatePostModal();
-    
-    // Feedback visual
-    showNotification('Post publicado com sucesso! 🎉');
-}
-
-// ====== CHAR COUNT ======
-function updateCharCount() {
-    const textarea = document.getElementById('postContent');
-    const charCount = document.getElementById('charCount');
-    const count = textarea.value.length;
-    
-    charCount.textContent = count;
-    charCount.style.color = count > 500 ? '#ef4444' : count > 450 ? '#f59e0b' : '#666';
-}
-
-// ====== NOTIFICATION ======
-function showNotification(message) {
-    // Criar elemento de notificação
-    const notification = document.createElement('div');
-    notification.style.cssText = `
-        position: fixed;
-        top: 90px;
-        right: 20px;
-        background: white;
-        padding: 16px 24px;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(165, 42, 42, 0.3);
-        z-index: 1001;
-        font-weight: 600;
-        color: rgb(165, 42, 42);
-        animation: slideInRight 0.4s ease-out;
-    `;
-    notification.textContent = message;
-    
-    // Adicionar ao body
-    document.body.appendChild(notification);
-    
-    // Remover após 3 segundos
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.4s ease-out';
-        setTimeout(() => {
-            notification.remove();
-        }, 400);
-    }, 3000);
-}
-
-// ====== FOLLOW BUTTON ======
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('btn-follow')) {
-        const btn = e.target;
-        if (btn.textContent === 'Seguir') {
-            btn.textContent = 'Seguindo';
-            btn.style.background = '#f0f0f0';
-            btn.style.color = '#666';
-        } else {
-            btn.textContent = 'Seguir';
-            btn.style.background = 'rgb(165, 42, 42)';
-            btn.style.color = 'white';
+        // Funções do banco de dados
+        function getUsers() {
+            return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
         }
-    }
-});
 
-// ====== EVENT LISTENERS ======
-document.addEventListener('DOMContentLoaded', () => {
-    // Renderizar posts iniciais
-    renderPosts();
-    
-    // Adicionar listener para textarea
-    const textarea = document.getElementById('postContent');
-    if (textarea) {
-        textarea.addEventListener('input', updateCharCount);
-    }
-    
-    // Fechar modal ao clicar fora
-    document.getElementById('createPostModal').addEventListener('click', (e) => {
-        if (e.target.classList.contains('modal-overlay')) {
-            closeCreatePostModal();
+        function saveUsers(users) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
         }
-    });
-    
-    // Atalho de teclado para fechar modal (ESC)
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            const modal = document.getElementById('createPostModal');
-            if (!modal.classList.contains('hidden')) {
-                closeCreatePostModal();
+
+        function setCurrentUser(user) {
+            localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(user));
+        }
+
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+        }
+
+        // Verificar se já está logado
+        if (getCurrentUser()) {
+            window.location.href = "home.html";
+        }
+
+        // Alternar entre login e cadastro
+        function switchTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const cadastroForm = document.getElementById('cadastroForm');
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                cadastroForm.classList.add('hidden');
+                tabs[0].classList.add('active');
+            } else {
+                loginForm.classList.add('hidden');
+                cadastroForm.classList.remove('hidden');
+                tabs[1].classList.add('active');
             }
+            
+            document.getElementById('message').innerHTML = '';
         }
-    });
-    
-    // Atalho de teclado para publicar (Ctrl/Cmd + Enter)
-    textarea?.addEventListener('keydown', (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-            createPost();
-        }
-    });
-});
 
-// ====== ADICIONAR ANIMAÇÕES CSS DINAMICAMENTE ======
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(100px);
+        // Mostrar mensagem
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.innerHTML = `<div class="msg ${type}">${text}</div>`;
+            setTimeout(() => msg.innerHTML = '', 3000);
         }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    
-    @keyframes slideOutRight {
-        from {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        to {
-            opacity: 0;
-            transform: translateX(100px);
-        }
-    }
-`;
-document.head.appendChild(style);
+
+        // LOGIN
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPass').value;
+            
+            const users = getUsers();
+            const found = users.find(u => 
+                (u.username === user || u.email === user) && u.password === pass
+            );
+            
+            if (found) {
+                setCurrentUser(found);
+                showMessage('Login realizado com sucesso!', 'success');
+                setTimeout(() => window.location.href = "home.html", 500);
+            } else {
+                showMessage('Usuário ou senha incorretos!', 'error');
+            }
+        });
+
+        // CADASTRO
+        document.getElementById('cadastroForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const nome = document.getElementById('cadNome').value.trim();
+            const user = document.getElementById('cadUser').value.trim();
+            const email = document.getElementById('cadEmail').value.trim();
+            const pass = document.getElementById('cadPass').value;
+            
+            if (pass.length < 6) {
+                showMessage('Senha deve ter no mínimo 6 caracteres!', 'error');
+                return;
+            }
+            
+            const users = getUsers();
+            
+            if (users.find(u => u.username === user)) {
+                showMessage('Nome de usuário já existe!', 'error');
+                return;
+            }
+            
+            if (users.find(u => u.email === email)) {
+                showMessage('E-mail já cadastrado!', 'error');
+                return;
+            }
+            
+            const newUser = {
+                id: Date.now().toString(),
+                nomeCompleto: nome,
+                username: user,
+                email: email,
+                password: pass,
+                nascimento: "",
+                telefone: "",
+                contaPrivada: false,
+                tema: "claro",
+                seguidores: 0,
+                seguindo: 0,
+                dataCriacao: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            saveUsers(users);
+            setCurrentUser(newUser);
+            
+            showMessage('Cadastro realizado com sucesso!', 'success');
+            setTimeout(() => window.location.href = "home.html", 500);
+        });

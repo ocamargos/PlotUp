@@ -3,189 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - PlotUp</title>
-    <link rel="stylesheet" href="home.css">
+    <title>PlotUp - Entrar</title>
+    <link rel="stylesheet" href="index.css">
+    
 </head>
 <body>
-    <!-- HEADER -->
-    <header>
-        <div class="container">
-            <a href="home.html"><img src="midias/logo com fundo.png" alt="logo" class="logo"></a>
-            <a href="home.html">Home</a>
-            <a href="pesquisar.html">Pesquisa</a>
-            <a href="explorar.html">Explorar</a>
-            <a href="perfil.html">Perfil</a>
-            <a href="config.html">Configuração</a>
+    <div class="auth-container">
+        <div class="logo">
+            <h1>PlotUp</h1>
+            <p>Bem-vindo de volta!</p>
         </div>
-    </header>
 
-    <!-- MAIN CONTENT -->
-    <div class="home-container">
-        <!-- SIDEBAR LEFT -->
-        <aside class="sidebar-left">
-            <div class="profile-widget">
-                <div class="widget-cover"></div>
-                <div class="widget-content">
-                    <div class="widget-avatar">JD</div>
-                    <div class="widget-name">João Developer</div>
-                    <div class="widget-username">@joaodev</div>
-                    <div class="widget-stats">
-                        <div class="widget-stat">
-                            <span class="stat-value">245</span>
-                            <span class="stat-label">Seguidores</span>
-                        </div>
-                        <div class="widget-stat">
-                            <span class="stat-value">189</span>
-                            <span class="stat-label">Seguindo</span>
-                        </div>
-                    </div>
-                    <a href="perfil.html" class="btn-view-profile">Ver Perfil</a>
-                </div>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('login')">Entrar</button>
+            <button class="tab" onclick="switchTab('cadastro')">Cadastrar</button>
+        </div>
+
+        <div id="message"></div>
+
+        <!-- FORMULÁRIO DE LOGIN -->
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Usuário ou E-mail</label>
+                <input type="text" class="input" id="loginUser" required>
             </div>
 
-            <div class="trending-widget">
-                <h3 class="widget-title">🔥 Em Alta</h3>
-                <div class="trending-list">
-                    <div class="trending-item">
-                        <div class="trending-tag">#DesignThinking</div>
-                        <div class="trending-count">2.5k posts</div>
-                    </div>
-                    <div class="trending-item">
-                        <div class="trending-tag">#IA2024</div>
-                        <div class="trending-count">1.8k posts</div>
-                    </div>
-                    <div class="trending-item">
-                        <div class="trending-tag">#StartupLife</div>
-                        <div class="trending-count">1.2k posts</div>
-                    </div>
-                    <div class="trending-item">
-                        <div class="trending-tag">#RemoteWork</div>
-                        <div class="trending-count">890 posts</div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
-        <!-- FEED -->
-        <main class="feed">
-            <!-- CREATE POST -->
-            <div class="create-post">
-                <div class="create-post-header">
-                    <div class="create-avatar">JD</div>
-                    <input 
-                        type="text" 
-                        class="create-input" 
-                        placeholder="No que você está pensando, João?"
-                        readonly
-                        onclick="openCreatePostModal()"
-                    >
-                </div>
-                <div class="create-actions">
-                    <button class="create-action-btn" onclick="openCreatePostModal()">
-                        📸 Foto
-                    </button>
-                    <button class="create-action-btn" onclick="openCreatePostModal()">
-                        🎥 Vídeo
-                    </button>
-                    <button class="create-action-btn" onclick="openCreatePostModal()">
-                        📊 Enquete
-                    </button>
-                    <button class="create-action-btn" onclick="openCreatePostModal()">
-                        📝 Artigo
-                    </button>
-                </div>
+            <div class="form-group">
+                <label>Senha</label>
+                <input type="password" class="input" id="loginPass" required>
             </div>
 
-            <!-- POSTS FEED -->
-            <div class="posts-container" id="postsContainer">
-                <!-- Posts will be rendered here by JavaScript -->
-            </div>
-        </main>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
 
-        <!-- SIDEBAR RIGHT -->
-        <aside class="sidebar-right">
-            <div class="suggestions-widget">
-                <h3 class="widget-title">👥 Sugestões para Seguir</h3>
-                <div class="suggestions-list">
-                    <div class="suggestion-item">
-                        <div class="suggestion-avatar">MC</div>
-                        <div class="suggestion-info">
-                            <div class="suggestion-name">Marina Costa</div>
-                            <div class="suggestion-username">@marinacosta</div>
-                        </div>
-                        <button class="btn-follow">Seguir</button>
-                    </div>
-                    <div class="suggestion-item">
-                        <div class="suggestion-avatar">AS</div>
-                        <div class="suggestion-info">
-                            <div class="suggestion-name">Ana Silva</div>
-                            <div class="suggestion-username">@anasilva</div>
-                        </div>
-                        <button class="btn-follow">Seguir</button>
-                    </div>
-                    <div class="suggestion-item">
-                        <div class="suggestion-avatar">PS</div>
-                        <div class="suggestion-info">
-                            <div class="suggestion-name">Pedro Santos</div>
-                            <div class="suggestion-username">@pedrosantos</div>
-                        </div>
-                        <button class="btn-follow">Seguir</button>
-                    </div>
-                </div>
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <form id="cadastroForm" class="hidden">
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" class="input" id="cadNome" required>
             </div>
 
-            <div class="quick-links-widget">
-                <h3 class="widget-title">⚡ Links Rápidos</h3>
-                <div class="quick-links">
-                    <a href="#" class="quick-link">📖 Central de Ajuda</a>
-                    <a href="#" class="quick-link">🔒 Privacidade</a>
-                    <a href="#" class="quick-link">📋 Termos de Uso</a>
-                    <a href="#" class="quick-link">💼 Carreiras</a>
-                </div>
+            <div class="form-group">
+                <label>Nome de Usuário</label>
+                <input type="text" class="input" id="cadUser" required>
             </div>
 
-            <div class="footer-widget">
-                <p>© 2024 PlotUp. Todos os direitos reservados.</p>
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" class="input" id="cadEmail" required>
             </div>
-        </aside>
+
+            <div class="form-group">
+                <label>Senha (mínimo 6 caracteres)</label>
+                <input type="password" class="input" id="cadPass" required>
+            </div>
+
+            <button type="submit" class="btn">Criar Conta</button>
+        </form>
     </div>
 
-    <!-- CREATE POST MODAL -->
-    <div class="modal-overlay hidden" id="createPostModal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Criar Post</h2>
-                <button class="close-modal" onclick="closeCreatePostModal()">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="modal-user">
-                    <div class="modal-avatar">JD</div>
-                    <div class="modal-user-info">
-                        <div class="modal-name">João Developer</div>
-                        <div class="modal-username">@joaodev</div>
-                    </div>
-                </div>
-                <textarea 
-                    class="post-textarea" 
-                    placeholder="No que você está pensando?"
-                    id="postContent"
-                ></textarea>
-                <div class="char-count">
-                    <span id="charCount">0</span> / 500
-                </div>
-                <div class="modal-actions-bottom">
-                    <div class="modal-tools">
-                        <button class="tool-btn" title="Adicionar imagem">📸</button>
-                        <button class="tool-btn" title="Adicionar vídeo">🎥</button>
-                        <button class="tool-btn" title="Adicionar emoji">😊</button>
-                        <button class="tool-btn" title="Adicionar localização">📍</button>
-                    </div>
-                    <button class="btn-post" onclick="createPost()">Publicar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="home.js"></script>
+    <script src="index.js"></script>
 </body>
 </html>
